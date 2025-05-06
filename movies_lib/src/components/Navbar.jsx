@@ -2,12 +2,13 @@ import React, { useState } from "react"; //useState armazena os valores dos filt
 import { Link } from "react-router-dom";
 import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi";
 
+import "./Navbar.css";
+
 const Navbar = ({ onRandomSearch }) => {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [showGenreList, setShowGenreList] = useState(false);
 
   const genres = [
-    { id: "", name: "Todos" },
     { id: "28", name: "Ação" },
     { id: "12", name: "Aventura" },
     { id: "16", name: "Animação" },
@@ -75,9 +76,9 @@ const Navbar = ({ onRandomSearch }) => {
           </div>
         )}
 
-        {selectedGenre && (
-          <button onClick={handleGenreSelect}>🎲 Sortear Filme</button>
-        )}
+        <button className="button-sorted" onClick={handleSortearClick}>
+          🎲 Sortear Filme
+        </button>
       </div>
     </nav>
   );
