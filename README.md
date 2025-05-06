@@ -1,0 +1,1 @@
+O CineSorte é uma plataforma ou aplicativo que busca ajudar os usuários a escolherem filmes de forma aleatória, com base em critérios específicos, como gênero ou avaliação. O nome "CineSorte" sugere a ideia de "sorteio de filmes", onde o usuário pode ser guiado para descobrir filmes novos ou interessantes, de maneira divertida e prática.
