@@ -6,3 +6,26 @@
     list-style: none;
     width: 100%;
 }
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* Para centralizar na tela */
+  }
+  
+  .spinner {
+    border: 4px solid #f3f3f3; /* Cor do fundo */
+    border-top: 4px solid #6046ff; /* Cor da borda em movimento */
+    border-radius: 50%;
+    width: 50px; /* Tamanho do spinner */
+    height: 50px; /* Tamanho do spinner */
+    animation: spin 1s linear infinite; /* Animação */
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg); /* Girar 360 graus */
+    }
+  }
+  

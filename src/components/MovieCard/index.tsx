@@ -1,3 +1,5 @@
+'use client';
+
 import { Movie } from "@/types/movie"
 import StarRating from "../StarRating";
 import './index.scss';
@@ -11,7 +13,9 @@ export default function MovieCard(props: Props) {
     return (
         <li key={movie.id} className='movie-card'>
             <div className="movie-poster">
-                <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" />
+                <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} 
+                     alt={movie.title} 
+                />
             </div>
 
             <div className="movie-infos">
@@ -21,7 +25,7 @@ export default function MovieCard(props: Props) {
                 <StarRating
                     rating={movie.vote_average}
                 />
-                <div className="hiden-conten">
+                <div className="hidden-content">
                     {movie.overview &&
                         <p className="description">
                             {movie.overview.length > 100
@@ -29,7 +33,9 @@ export default function MovieCard(props: Props) {
                                 : movie.overview}
                         </p>
                     }
-                    <button className="btn-default">Ver mais</button>
+                    <button className="btn-default">
+                        Ver mais
+                    </button>
                 </div>
             </div>
         </li>
