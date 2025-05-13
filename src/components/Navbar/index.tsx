@@ -1,16 +1,20 @@
 'use client';
 
 import React, { useState } from 'react';
+import { fetchRandomMovieByGenre } from '@/services/tmdb';
 import './index.scss';
-import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi";
+import { BiCameraMovie } from "react-icons/bi";
 
+// Tipagem do componente
 interface NavbarProps {
-    onRandomSearch: (params: { genre: string }) => void
+    onRandomSearch: (params: { genre: string }) => void;
 }
 
 export default function Navbar(props: NavbarProps) {
-    const [selectedGenre, setSelectedGenre] = useState("");
-    const [showGenreList, setShowGenreList] = useState(false);
+    const [selectedGenre, setSelectedGenre] = useState("");  //seleçao do genero
+    const [showGenreList, setShowGenreList] = useState(false); //menu de generos
+    const [loading, setLoading] = useState(false);  //carregamento
+    const [randomMovie, setRandomMovie] = useState<any>(null);  //armazena o filme sorteado
 
     const genres = [
         { id: "28", name: "Ação" },
@@ -34,42 +38,50 @@ export default function Navbar(props: NavbarProps) {
         { id: "37", name: "Faroeste" }
     ];
 
-    //alterar a exibição da lista
     const toggleGenreList = () => {
-        setShowGenreList(!showGenreList)
-    }
+        setShowGenreList(!showGenreList);
+    };
 
-    //seleciona um gênero da lista
     const handleGenreSelect = (genreId: string) => {
-        setSelectedGenre(genreId);
-        setShowGenreList(false);
-    }
+        setSelectedGenre(genreId); 
+        setShowGenreList(false);    
+    };
 
-    const handleSortearClick = () => {
-        props.onRandomSearch({ genre: selectedGenre });
-    }
+    const handleSortearClick = async () => {
+        if (!selectedGenre) return;  
+        setLoading(true);  
+
+        try {
+            const movie = await fetchRandomMovieByGenre(selectedGenre);  
+            setRandomMovie(movie);  
+        } catch (error) {
+            console.error("Erro ao buscar o filme", error);
+        } finally {
+            setLoading(false);  
+    };
 
     return (
-        <nav className='navbar'>
-            <h2 className='title-navbar'>
+        <nav className="navbar">
+            <h2 className="title-navbar">
                 <a href="/">
                     <BiCameraMovie />
                     CineSorte
                 </a>
             </h2>
 
-            <div className='genre-selector'>
-                <div className='genre-field' onClick={toggleGenreList}>
+            <div className="genre-selector">
+                <div className="genre-field" onClick={toggleGenreList}>
                     {selectedGenre
                         ? genres.find((genre) => genre.id === selectedGenre)?.name
                         : "Escolha um Gênero"}
                 </div>
 
                 {showGenreList && (
-                    <div className='genre-list'>
+                    <div className="genre-list">
                         {genres.map((genre) => (
-                            <div key={genre.id}
-                                className='genre-option'
+                            <div
+                                key={genre.id}
+                                className="genre-option"
                                 onClick={() => handleGenreSelect(genre.id)}
                             >
                                 {genre.name}
@@ -78,11 +90,22 @@ export default function Navbar(props: NavbarProps) {
                     </div>
                 )}
 
-                <button className='btn-sorted' onClick={handleSortearClick}>
-                     Sortear Filme
+                <button className="btn-sorted" onClick={handleSortearClick} disabled={loading}>
+                    {loading ? "Carregando..." : "Sortear Filme"}
                 </button>
-
             </div>
+
+
+            {randomMovie && (
+                <div className="movie-info">
+                    <h3>{randomMovie.title}</h3>
+                    <img
+                        src={`https://image.tmdb.org/t/p/w500/${randomMovie.poster_path}`}
+                        alt={randomMovie.title}
+                    />
+                    <p>{randomMovie.overview}</p>
+                </div>
+            )}
         </nav>
     );
 }

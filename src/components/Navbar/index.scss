@@ -110,4 +110,19 @@
             transform: translateY(0);
         }
     }
+
+    .loading-indicator {
+        margin-top: 10px;
+        font-style: italic;
+        color: #f5c518; // cor tipo IMDB
+        animation: pulse 1.5s infinite;
+        text-align: center;
+      }
+      
+      @keyframes pulse {
+        0% { opacity: 0.4; }
+        50% { opacity: 1; }
+        100% { opacity: 0.4; }
+      }
+      
 }
