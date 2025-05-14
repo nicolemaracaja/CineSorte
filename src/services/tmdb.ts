@@ -4,7 +4,7 @@ export async function fetchRandomMovieByGenre(genreId: string) {
 
     // 1. Buscar os filmes dessa categoria (1ª página)
     const response = await fetch(
-        `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=1`
+        `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=1&language=pt-BR`
     );
     const data = await response.json();
 

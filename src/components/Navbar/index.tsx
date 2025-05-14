@@ -8,13 +8,21 @@ import { BiCameraMovie } from "react-icons/bi";
 // Tipagem do componente
 interface NavbarProps {
     onRandomSearch: (params: { genre: string }) => void;
+    onGenreSelected: (genreId: string) => void;
+    onSortearClick: () => void;
+    selectedGenre: string;
+    loading: boolean;
 }
 
-export default function Navbar(props: NavbarProps) {
-    const [selectedGenre, setSelectedGenre] = useState("");  //seleçao do genero
-    const [showGenreList, setShowGenreList] = useState(false); //menu de generos
-    const [loading, setLoading] = useState(false);  //carregamento
-    const [randomMovie, setRandomMovie] = useState<any>(null);  //armazena o filme sorteado
+export default function Navbar({
+    onRandomSearch,
+    onGenreSelected,
+    onSortearClick,
+    selectedGenre,
+    loading
+}: NavbarProps) {
+
+    const [showGenreList, setShowGenreList] = useState(false);
 
     const genres = [
         { id: "28", name: "Ação" },
@@ -43,21 +51,8 @@ export default function Navbar(props: NavbarProps) {
     };
 
     const handleGenreSelect = (genreId: string) => {
-        setSelectedGenre(genreId); 
-        setShowGenreList(false);    
-    };
-
-    const handleSortearClick = async () => {
-        if (!selectedGenre) return;  
-        setLoading(true);  
-
-        try {
-            const movie = await fetchRandomMovieByGenre(selectedGenre);  
-            setRandomMovie(movie);  
-        } catch (error) {
-            console.error("Erro ao buscar o filme", error);
-        } finally {
-            setLoading(false);  
+        onGenreSelected(genreId);
+        setShowGenreList(false);
     };
 
     return (
@@ -90,22 +85,15 @@ export default function Navbar(props: NavbarProps) {
                     </div>
                 )}
 
-                <button className="btn-sorted" onClick={handleSortearClick} disabled={loading}>
-                    {loading ? "Carregando..." : "Sortear Filme"}
+                <button
+                    className="btn-sorted"
+                    onClick={onSortearClick}
+                    disabled={loading || !selectedGenre}
+                >
+                    {loading ? "..." : "Sortear Filme"}
                 </button>
             </div>
-
-
-            {randomMovie && (
-                <div className="movie-info">
-                    <h3>{randomMovie.title}</h3>
-                    <img
-                        src={`https://image.tmdb.org/t/p/w500/${randomMovie.poster_path}`}
-                        alt={randomMovie.title}
-                    />
-                    <p>{randomMovie.overview}</p>
-                </div>
-            )}
         </nav>
     );
 }
+
