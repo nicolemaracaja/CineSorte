@@ -4,10 +4,9 @@ import React, { useState } from "react";
 import { fetchRandomMovieByGenre } from "@/services/tmdb";
 import "./index.scss";
 import Image from "next/image";
+import Link from "next/link";
 import logo from "../../../public/assets/logo.png";
- 
 
-// Tipagem do componente
 interface NavbarProps {
   onRandomSearch: (params: { genre: string }) => void;
   onGenreSelected: (genreId: string) => void;
@@ -21,7 +20,6 @@ export default function Navbar({
   onGenreSelected,
   onSortearClick,
   selectedGenre,
-  loading,
 }: NavbarProps) {
   const [showGenreList, setShowGenreList] = useState(false);
 
@@ -58,18 +56,26 @@ export default function Navbar({
 
   return (
     <nav className="navbar">
-      <h2 className="title-navbar">
-        <a href="/">
-          <Image
-            src={logo}
-            alt="Logo CineSorte"
-            width={120}
-            height={120}
-            className="logo"
-          />
-          CineSorte
-        </a>
-      </h2>
+      <div>
+        <div className="logo-navbar">
+          <a href="/">
+            <Image
+              src={logo}
+              alt="Logo CineSorte"
+              width={120}
+              height={120}
+              className="logo"
+            />
+          </a>
+        </div>
+
+        <div className="nav-options">
+          <Link href="/">Início</Link>
+          <Link href="/catalogo">Catálogo</Link>
+          <Link href="/favoritos">Favoritos</Link>
+          <Link href="/sobre">Sobre</Link>
+        </div>
+      </div>
 
       <div className="genre-selector">
         <div className="genre-field" onClick={toggleGenreList}>
@@ -95,9 +101,9 @@ export default function Navbar({
         <button
           className="btn-sorted"
           onClick={onSortearClick}
-          disabled={loading || !selectedGenre}
+          disabled={!selectedGenre}
         >
-          {loading ? "..." : "Sortear Filme"}
+          Sortear Filme
         </button>
       </div>
     </nav>
