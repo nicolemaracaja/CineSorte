@@ -4,7 +4,7 @@ import MovieList from "@/components/MovieList";
 import Navbar from "@/components/Navbar";
 import RandomMovieCard from "@/components/RandomMovieCard";
 import { fetchRandomMovieByGenre } from "@/services/tmdb";
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Home() {
   const [selectedGenre, setSelectedGenre] = useState("");
@@ -37,6 +37,7 @@ export default function Home() {
         />
 
         {randomMovie && <RandomMovieCard movie={randomMovie}/>}
+        <MovieList/>
       </div>
     </div>
   );

@@ -1,128 +1,130 @@
 .navbar {
-    background-color: #0f172a;
-    padding: 12px 3%;
-    position: relative;
-    z-index: 1;
-    overflow: visible;
-    color: white;
-    padding: 16px 32px;
+  background-color: rgba(2, 6, 23, 0.85); 
+  backdrop-filter: blur(8px); // efeito vidro se quiser
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); // sombra leve
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); // borda sutil
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky; // permanece no topo ao rolar
+  top: 0;
+  z-index: 50;
+
+  .title-navbar a {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    gap: 0.5rem;
+    color: #ffcc00;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+  }
 
-    .title-navbar a {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #ffcc00;
-        text-decoration: none; 
-        font-size: 1.5rem;
-        transition: all 0.3s ease;
-      }
-      
-      .title-navbar a:hover {
-        color: #d4a700;           
-        transform: scale(1.05);   
-      }
-      
+  .title-navbar a:hover {
+    color: #d4a700;
+    transform: scale(1.05);
+  }
 
-    .genre-selector {
-        position: relative;
-        width: 200px;
-        font-family: sans-serif;
+  .genre-selector {
+    position: relative;
+    width: 200px;
+    font-family: sans-serif;
 
-        .genre-field {
-            font-weight: bold;
-            background-color: white;
-            color: #333;
-            padding: 10px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            user-select: none;
-            border: 1px solid #ccc;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .genre-field::after {
-            content: "▾";
-            margin-left: 8px;
-            font-size: 12px;
-        }
-
-        .genre-list {
-            color: #000;
-            position: absolute;
-            top: 110%;
-            left: 0;
-            right: 0;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            z-index: 999;
-            max-height: 200px;
-            overflow-y: auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.2s ease-in-out;
-
-            .genre-option {
-                padding: 10px 12px;
-                cursor: pointer;
-                transition: background-color 0.2s;
-            }
-        
-            .genre-option:hover {
-                background-color: #f0f0f0;
-            }
-        }
-
+    .genre-field {
+      font-weight: bold;
+      background-color: white;
+      color: #333;
+      padding: 10px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
+    .genre-field::after {
+      content: "▾";
+      margin-left: 8px;
+      font-size: 12px;
+    }
 
-    .btn-sorted {
-        font-size: medium;
-        margin-top: 8px;
-        border-radius: 5px;
-        width: 100%;
-        height: 36px;
-        background-color: #ffcc00;
-        border: none;
-        color: #000;
-        font-weight: bold;
+    .genre-list {
+      color: #000;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      right: 0;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      z-index: 999;
+      max-height: 200px;
+      overflow-y: auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.2s ease-in-out;
+
+      .genre-option {
+        padding: 10px 12px;
         cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .btn-sorted:hover {
-        background-color: #e6b800;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-5%);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .loading-indicator {
-        margin-top: 10px;
-        font-style: italic;
-        color: #f5c518; // cor tipo IMDB
-        animation: pulse 1.5s infinite;
-        text-align: center;
+        transition: background-color 0.2s;
       }
-      
-      @keyframes pulse {
-        0% { opacity: 0.4; }
-        50% { opacity: 1; }
-        100% { opacity: 0.4; }
+
+      .genre-option:hover {
+        background-color: #f0f0f0;
       }
-      
+    }
+  }
+
+  .btn-sorted {
+    font-size: medium;
+    margin-top: 8px;
+    border-radius: 5px;
+    width: 100%;
+    height: 36px;
+    background-color: #ffcc00;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-sorted:hover {
+    background-color: #e6b800;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .loading-indicator {
+    margin-top: 10px;
+    font-style: italic;
+    color: #f5c518; // cor tipo IMDB
+    animation: pulse 1.5s infinite;
+    text-align: center;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.4;
+    }
+  }
 }
