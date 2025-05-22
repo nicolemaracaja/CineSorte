@@ -1,5 +1,5 @@
 .random-movie-card {
-  background: #111;
+  background: #0A1A3D;
   color: #fff;
   padding: 2rem;
   border-radius: 1rem;
@@ -61,12 +61,12 @@
       }
 
       .favorite-button {
-        background-color: #1a1a1a;
-        border: 2px solid #f5c518;
-        color: #f5c518;
+        background-color: #f5c518;
+        border: 2px solid #111;
+        color: #111;
 
         &:hover {
-          background-color: #f5c518;
+          background-color: #aa8500;
           color: #000;
         }
       }

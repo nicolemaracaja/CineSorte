@@ -26,7 +26,7 @@ export default function RandomMovieCard({ movie }: RandomMovieCardProps) {
           </div>
           <p className="movie-description">{movie.overview}</p>
           <div className="buttons">
-            <button className="favorite-button">💛 Salvar nos Favoritos</button>
+            <button className="favorite-button">Salvar nos Favoritos</button>
           </div>
         </div>
       </div>
