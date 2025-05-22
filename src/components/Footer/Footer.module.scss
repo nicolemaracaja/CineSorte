@@ -1,0 +1,26 @@
+.footer {
+  background-color: #1a202c;  // bg-gray-900
+  color: #9ca3af;             // text-gray-400
+  text-align: center;
+  padding: 1.5rem 0;          // py-6
+  margin-top: 2rem;           // mt-8
+
+  .container {
+    max-width: 64rem;         // max-w-4xl
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;       // px-4
+    padding-right: 1rem;
+
+    p {
+      &.small {
+        font-size: 0.875rem;  // text-sm
+      }
+
+      &.xsmall {
+        font-size: 0.75rem;   // text-xs
+        margin-top: 0.5rem;   // mt-2
+      }
+    }
+  }
+}
